@@ -22,7 +22,9 @@ This role requires following collections (specified via `collections/requirement
 - [`zabbix.zabbix`](https://catalog.redhat.com/software/collection/zabbix/zabbix): v1.1.1 or greater
 - [`community.crypto`](https://docs.ansible.com/ansible/latest/collections/community/crypto/index.html): v2.3.2 or greater
 
-**Note**: To make use of Red Hat's certified collections, you need to be a Red Hat subscriber. If you don't own any subscriptions, you can make use of 
+**Note**: To make use of [Red Hat certified collections](https://www.redhat.com/en/technologies/management/ansible/content-collections), you need to be a Red Hat subscriber with a
+subscription that provides [Red Hat Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible/features), which includes access to the
+certified collections. If you don't own any subscriptions that provides this access, you can make use of 
 [Red Hat's Developer Subscription](https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux) which is provided at no cost by Red Hat.
 
 Role Variables
