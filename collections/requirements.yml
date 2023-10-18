@@ -1,4 +1,7 @@
 ---
 collections:
   - name: 'zabbix.zabbix'
+    version: '>=1.1.1'
+  - name: 'community.crypto'
+    version: '>=2.3.2'
 ...
