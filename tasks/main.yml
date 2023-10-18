@@ -101,7 +101,7 @@
     ansible_connection: 'httpapi'
     ansible_host: '{{ _zba_api_host }}'
     ansible_httpapi_port: '{{ _zba_api_port }}'
-    ansible_httpapi_use_ssl: '{{ _zba_api_ssl }}'
+    ansible_httpapi_use_ssl: '{{ _zba_api_use_ssl }}'
     ansible_httpapi_validate_certs: '{{ _zba_api_validate_certs }}'
     ansible_user: '{{ _zba_api_user }}'
     ansible_httpapi_pass: '{{ _zba_api_password | default(omit) }}'

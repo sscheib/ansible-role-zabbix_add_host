@@ -1,3 +1,10 @@
 ---
-# defaults file for zabbix_add_host
+# port of the Zabbix server API
+_def_zba_api_port: 443
+
+# whether to connect to the Zabbix API via SSL
+_def_zba_api_use_ssl: true
+
+# whether to validate certificates when connecting to the API
+_def_zba_api_validate_certs: true
 ...

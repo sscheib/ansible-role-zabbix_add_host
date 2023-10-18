@@ -1,3 +1,50 @@
 ---
-# vars file for zabbix_add_host
+#
+# mandatory variables
+#
+
+# host name of the Zabbix server instance serving the API
+_zba_api_host: '{{ zba_api_host | mandatory }}'
+
+# user to authenticate with to the Zabbix API
+_zba_api_user: '{{ zba_api_user | mandatory }}'
+
+# password of the user connecting to the Zabbix API
+_zba_api_password: '{{ zba_api_password | mandatory }}'
+
+#
+# optional variables with defaults
+#
+
+# port of the Zabbix server API
+_zba_api_port: '{{ zba_api_port | default(_def_zba_api_port) }}'
+
+# whether to connect to the Zabbix API via SSL
+_zba_api_use_ssl: '{{ zba_api_use_ssl | default(_def_zba_api_use_ssl) }}'
+
+# whether to validate certificates when connecting to the API
+_zba_api_validate_certs: >-
+  {{
+    zba_api_validate_certs |
+    default(_def_zba_validate_certs)
+  }}
+
+#
+# optional variables without defaults
+#
+
+# path to the certificate to extract issuer and subject from
+_zba_cert_path: '{{ zba_cert_path | default(undef()) }}'
+
+# use when Zabbix is served via a non-default path, e.g. /zbx
+_zba_api_url: '{{ zba_api_url | default(undef()) }}'
+
+# when accessing Zabbix requires additionally HTTP basic
+# authentication, use the variables below
+
+# HTTP basic authentication user name
+_zba_http_login: '{{ zba_http_login | default(undef()) }}'
+
+# HTTP basic authentication password
+_zba_http_password: '{{ zba_http_password | default(undef()) }}'
 ...
