@@ -1,0 +1,36 @@
+---
+enable_list:
+  - 'args'
+  - 'empty-string-compare'
+  - 'no-log-password'
+  - 'no-same-owner'
+  - 'name[prefix]'
+
+kinds:
+  - yaml: '.ansible-lint'
+  - yaml: '.github/workflows/ansible-lint.yml'
+  - yaml: '.pre-commit-config.yaml'
+  - yaml: '.yamllint'
+  - yaml: '**/*.{yml,yaml}'
+  - playbooks: '*.{yml,yaml}'
+# playbooks are stored in the top directory and
+# should be the last match
+
+loop_var_prefix: '^(__|{role}_)'
+max_block_depth: 20
+mock_roles:
+  - 'zabbix_add_host'
+  - 'zabbix_agent'
+  - 'zabbix_agent_ssl_keys'
+offline: true
+profile: 'production'
+skip_action_validation: false
+skip_list: []
+task_name_prefix: '{stem} | '
+use_default_rules: true
+var_naming_pattern: '^[a-z_][a-z0-9_]*$'
+warn_list:
+  - 'experimental'
+write_list:
+  - 'none'
+...

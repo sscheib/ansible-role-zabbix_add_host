@@ -1,0 +1,21 @@
+---
+repos:
+  - repo: 'https://github.com/ansible/ansible-lint'
+    rev: 'v6.20.3'
+    hooks:
+      - name: 'Ansible-lint'
+        additional_dependencies:
+          # https://github.com/pre-commit/pre-commit/issues/1526
+          # If you want to use specific version of ansible-core or ansible, feel
+          # free to override `additional_dependencies` in your own hook config
+          # file.
+          - 'ansible-core>=2.15'
+        always_run: true
+        description: 'This hook runs ansible-lint.'
+        entry: 'python3 -m ansiblelint -v --force-color'
+        id: 'ansible-lint'
+        language: 'python'
+        # do not pass files to ansible-lint, see:
+        # https://github.com/ansible/ansible-lint/issues/611
+        pass_filenames: false
+...

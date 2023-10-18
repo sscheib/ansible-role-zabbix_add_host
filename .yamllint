@@ -1,0 +1,44 @@
+---
+extends: 'default'
+
+rules:
+  braces:
+    level: 'error'
+    max-spaces-inside: 1
+  brackets:
+    level: 'error'
+    max-spaces-inside: 1
+  colons:
+    level: 'error'
+    max-spaces-after: -1
+  commas:
+    level: 'error'
+    max-spaces-after: -1
+  comments: 'enable'
+  comments-indentation: 'enable'
+  document-end: 'enable'
+  document-start: 'enable'
+  empty-lines:
+    level: 'error'
+    max: 3
+  empty-values: 'enable'
+  float-values: 'enable'
+  hyphens: 'enable'
+  indentation: 'enable'
+  key-duplicates: 'enable'
+  key-ordering: 'disable'
+  line-length: 'enable'
+  new-line-at-end-of-file: 'enable'
+  new-lines:
+    type: 'unix'
+  octal-values: 'enable'
+  quoted-strings: 'enable'
+  trailing-spaces: 'enable'
+  truthy: 'enable'
+
+yaml-files:
+  - '*.yaml'
+  - '*.yml'
+  - '.yamllint'
+  - '.ansible.lint'
+...

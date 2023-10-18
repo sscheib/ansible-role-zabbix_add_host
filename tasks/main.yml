@@ -1,0 +1,113 @@
+---
+- name: 'Read certificate information'
+  community.crypto.x509_certificate_info:
+    path: '{{ _zba_cert_path }}'
+  register: '__t_cert_info'
+  become: true
+  when: >
+    tls_subject is not defined
+    or tls_subject == ''
+    or tls_subject == None
+    or tls_issuer is not defined
+    or tls_issuer == ''
+    or tls_isser == None
+
+- name: 'Block: Handle setting certificate issuer'
+  when: >
+    tls_issuer is not defined
+    or tls_issuer == ''
+    or tls_isser == None
+  block:
+
+    - name: 'Set issuer facts'
+      ansible.builtin.set_fact:
+        __t_cert_mail: '{{ __t_cert_info.issuer.emailAddress }}'
+        __t_cert_cn: '{{ __t_cert_info.issuer.commonName }}'
+        __t_cert_ou: '{{ __t_cert_info.issuer.organizationalUnitName }}'
+        __t_cert_o: '{{ __t_cert_info.issuer.organizationName }}'
+        __t_cert_st: '{{ __t_cert_info.issuer.stateOrProvinceName }}'
+        __t_cert_c: '{{ __t_cert_info.issuer.countryName }}'
+
+    - name: 'Set issuer configuration value'
+      ansible.builtin.set_fact:
+        tls_issuer: >-
+          {{
+            'emailAddress=' ~ __t_cert_mail ~ ',' ~
+            'CN=' ~ __t_cert_cn ~ ',' ~
+            'OU=' ~ __t_cert_ou ~ ',' ~
+            'O='  ~ __t_cert_o ~ ',' ~
+            'ST=' ~ __t_cert_st ~ ',' ~
+            'C='  ~ __t_cert_c
+          }}
+
+- name: 'Block: Handle setting certificate subject'
+  when: >
+    tls_subject is not defined
+    or tls_subject == ''
+    or tls_isser == None
+  block:
+
+    - name: 'Set subject facts'
+      ansible.builtin.set_fact:
+        __t_cert_mail: '{{ __t_cert_info.subject.emailAddress }}'
+        __t_cert_cn: '{{ __t_cert_info.subject.commonName }}'
+        __t_cert_ou: '{{ __t_cert_info.subject.organizationalUnitName }}'
+        __t_cert_o: '{{ __t_cert_info.subject.organizationName }}'
+        __t_cert_l: '{{ __t_cert_info.subject.localityName }}'
+        __t_cert_st: '{{ __t_cert_info.subject.stateOrProvinceName }}'
+        __t_cert_c: '{{ __t_cert_info.subject.countryName }}'
+
+    - name: 'Set subject configuration value'
+      ansible.builtin.set_fact:
+        tls_subject: >-
+          {{
+            'emailAddress=' ~ __t_cert_mail ~ ',' ~
+            'CN=' ~ __t_cert_cn ~ ',' ~
+            'OU=' ~ __t_cert_ou ~ ',' ~
+            'O='  ~ __t_cert_o ~ ',' ~
+            'L='  ~ __t_cert_l ~ ',' ~
+            'ST=' ~ __t_cert_st ~ ',' ~
+            'C='  ~ __t_cert_c
+          }}
+
+- name: 'Include role to add a host to a Zabbix server'
+  zabbix.zabbix.zabbix_host:
+    description: '{{ description | default(omit) }}'
+    host: '{{ host }}'
+    hostgroups: '{{ hostgroups | default(omit) }}'
+    interfaces: '{{ interfaces | default(omit) }}'
+    inventory: '{{ inventory | default(omit) }}'
+    inventory_mode: '{{ inventory_mode | default(omit) }}'
+    ipmi_authtype: '{{ ipmi_authtype | default(omit) }}'
+    ipmi_password: '{{ ipmi_password | default(omit) }}'
+    ipmi_privilege: '{{ ipmi_privilege | default(omit) }}'
+    ipmi_username: '{{ ipmi_username | default(omit) }}'
+    macros: '{{ macros | default(omit) }}'
+    name: '{{ name | default(omit) }}'
+    proxy: '{{ proxy | default(omit) }}'
+    state: '{{ state | default(omit) }}'
+    status: '{{ status | default(omit) }}'
+    tags: '{{ tags | default(omit) }}'
+    templates: '{{ templates | default(omit) }}'
+    tls_accept: '{{ tls_accept | default(omit) }}'
+    tls_connect: '{{ tls_connect | default(omit) }}'
+    tls_issuer: '{{ tls_issuer | default(omit) }}'
+    tls_psk: '{{ tls_psk | default(omit) }}'
+    tls_psk_identity: '{{ tls_psk_identity | default(omit) }}'
+    tls_subject: '{{ tls_subject | default(omit) }}'
+  vars:
+    # connection variables
+    ansible_network_os: 'zabbix.zabbix.zabbix'
+    ansible_connection: 'httpapi'
+    ansible_host: '{{ _zba_api_host }}'
+    ansible_httpapi_port: '{{ _zba_api_port }}'
+    ansible_httpapi_use_ssl: '{{ _zba_api_ssl }}'
+    ansible_httpapi_validate_certs: '{{ _zba_api_validate_certs }}'
+    ansible_user: '{{ _zba_api_user }}'
+    ansible_httpapi_pass: '{{ _zba_api_password | default(omit) }}'
+    zabbix_api_url: '{{ _zba_api_url | default(omit) }}'
+
+    # HTTP basic auth variables
+    http_login: '{{ _zba_http_login | default(omit) }}'
+    http_password: '{{ _zba_http_password | default(omit) }}'
+...

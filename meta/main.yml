@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: 'sscheib'
+  description: 'Add host to a Zabbix instance with certificate authentication'
+  license: 'GPL-2.0-or-later'
+  min_ansible_version: 2.15
+  min_ansible_container_version: 2.15
+  platforms:
+    - name: 'EL'
+      versions:
+        - 8
+        - 9
+    - name: 'Debian'
+      versions:
+        - 'bullseye'
+        - 'buster'
+  galaxy_tags:
+    - 'zabbix'
+...
