@@ -1,3 +1,5 @@
+[![ansible-lint](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.yml)
+
 zabbix_add_host
 =========
 
