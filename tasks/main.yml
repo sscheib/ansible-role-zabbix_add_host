@@ -1,31 +1,50 @@
 ---
-- name: 'Load OS dependent variables'
-  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
-  vars:
-    params:
-      files:
-        - >-
-          {{
-            ansible_distribution ~ '-' ~
-            ansible_distribution_major_version ~ '.yml'
-          }}
-        - '{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml'
-        - '{{ ansible_distribution }}.yml'
-        - '{{ ansible_os_family }}.yml'
-        - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible
-      paths:
-        - '{{ role_path }}/vars'
-        - '{{ playbook_dir }}/vars'
+- name: 'Block: Handling gathering of facts and loading OS dependent variables'
+  when: >-
+    _zba_no_cert is not defined
+    or not _zba_no_cert
+  block:
+    - name: 'Ensure facts are gathered'
+      ansible.builtin.setup: {}
+
+    - name: 'Load OS dependent variables'
+      ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - >-
+              {{
+                ansible_distribution ~ '-' ~
+                ansible_distribution_major_version ~ '.yml'
+              }}
+            - >-
+              {{
+                ansible_os_family ~ '_' ~
+                ansible_distribution_major_version ~ '.yml'
+              }}
+            - '{{ ansible_distribution }}.yml'
+            - '{{ ansible_os_family }}.yml'
+            - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible
+          paths:
+            - '{{ role_path }}/vars'
+            - '{{ playbook_dir }}/vars'
 
 - name: 'Block: Handle reading certificate information'
   become: true
   when: >
-    tls_subject is not defined
-    or tls_subject == ''
-    or tls_subject == None
-    or tls_issuer is not defined
-    or tls_issuer == ''
-    or tls_isser == None
+    (
+      tls_subject is not defined
+      or tls_subject == ''
+      or tls_subject == None
+      or tls_issuer is not defined
+      or tls_issuer == ''
+      or tls_isser == None
+    )
+    and
+    (
+      _zba_no_cert is not defined
+      or not _zba_no_cert
+    )
   block:
     - name: 'Ensure required packages are installed'
       ansible.builtin.package:
@@ -39,9 +58,16 @@
 
 - name: 'Block: Handle setting certificate issuer'
   when: >
-    tls_issuer is not defined
-    or tls_issuer == ''
-    or tls_isser == None
+    (
+      tls_issuer is not defined
+      or tls_issuer == ''
+      or tls_isser == None
+    )
+    and
+    (
+      _zba_no_cert is not defined
+      or not _zba_no_cert
+    )
   block:
 
     - name: 'Set issuer facts'
@@ -67,9 +93,16 @@
 
 - name: 'Block: Handle setting certificate subject'
   when: >
-    tls_subject is not defined
-    or tls_subject == ''
-    or tls_isser == None
+    (
+      tls_subject is not defined
+      or tls_subject == ''
+      or tls_isser == None
+    )
+    and
+    (
+      _zba_no_cert is not defined
+      or not _zba_no_cert
+    )
   block:
 
     - name: 'Set subject facts'

@@ -38,10 +38,14 @@ Role Variables
 | `zba_api_port`                               | `443`                        | false    | port of the Zabbix server API                                                  |
 | `zba_api_use_ssl`                            | `true`                       | false    | whether to connect to the Zabbix API via SSL                                   |
 | `zba_api_validate_certs`                     | `true`                       | false    | whether to validate certificates when connecting to the API                    |
+| `zba_no_cert`                                | `false`                      | false    | whether to not deploy certification validation (usually not needed to be set)  |
 | `zba_cert_path`                              | unset                        | false    | path to the certificate to extract issuer and subject from                     |
 | `zba_api_url`                                | unset                        | false    | use when Zabbix is served via a non-default path, e.g. `/zbx`                  |
 | `zba_http_login`                             | unset                        | false    | HTTP basic authentication user name                                            |
 | `zba_http_password`                          | unset                        | false    | HTTP basic authentication password                                             |
+
+**Note** on `zba_no_cert`: I merely introduced this variable for myself, as I don't want to make use of two different roles, as I have some devices, which I cannot set
+up with certificate validation.
 
 Additionally, all variables of the module [`zabbix.zabbix.zabbix_host`](https://console.redhat.com/ansible/automation-hub/repo/published/zabbix/zabbix/content/module/zabbix_host/)
 can be used (see example below).
