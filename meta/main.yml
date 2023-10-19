@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: 'sscheib'
+  role_name: 'zabbix_add_host'
   description: 'Add host to a Zabbix instance with certificate authentication'
   license: 'GPL-2.0-or-later'
   min_ansible_version: 2.15
