@@ -7,4 +7,8 @@ _def_zba_api_use_ssl: true
 
 # whether to validate certificates when connecting to the API
 _def_zba_api_validate_certs: true
+
+# specifies whether not to deploy certificate validation
+# (usually, not needed)
+_def_zba_no_cert: false
 ...

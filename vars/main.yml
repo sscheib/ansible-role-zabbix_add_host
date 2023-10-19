@@ -28,6 +28,9 @@ _zba_api_validate_certs: >-
     zba_api_validate_certs |
     default(_def_zba_validate_certs)
   }}
+# specifies whether not to deploy certificate validation
+# (usually, not needed)
+_zba_no_cert: '{{ zba_no_cert | default(_def_zba_no_cert) }}'
 
 #
 # optional variables without defaults
