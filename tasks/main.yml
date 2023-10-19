@@ -1,8 +1,23 @@
 ---
-- name: 'Read certificate information'
-  community.crypto.x509_certificate_info:
-    path: '{{ _zba_cert_path }}'
-  register: '__t_cert_info'
+- name: 'Load OS dependent variables'
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - >-
+          {{
+            ansible_distribution ~ '-' ~
+            ansible_distribution_major_version ~ '.yml'
+          }}
+        - '{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible
+      paths:
+        - '{{ role_path }}/vars'
+        - '{{ playbook_dir }}/vars'
+
+- name: 'Block: Handle reading certificate information'
   become: true
   when: >
     tls_subject is not defined
@@ -11,6 +26,16 @@
     or tls_issuer is not defined
     or tls_issuer == ''
     or tls_isser == None
+  block:
+    - name: 'Ensure required packages are installed'
+      ansible.builtin.package:
+        name: '{{ _zba_required_packages }}'
+        update_cache: true
+
+    - name: 'Read certificate information'
+      community.crypto.x509_certificate_info:
+        path: '{{ _zba_cert_path }}'
+      register: '__t_cert_info'
 
 - name: 'Block: Handle setting certificate issuer'
   when: >

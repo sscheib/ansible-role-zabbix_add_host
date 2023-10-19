@@ -1,0 +1,6 @@
+---
+# packages required on the managed nodes for
+# running community.crypto
+_zba_required_packages:
+  - 'python3-cryptography'
+...

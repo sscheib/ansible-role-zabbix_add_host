@@ -49,6 +49,30 @@ can be used (see example below).
 This role will pass all variables *currently* (as of 2023-10-18) known for
 [`zabbix.zabbix.zabbix_host`](https://console.redhat.com/ansible/automation-hub/repo/published/zabbix/zabbix/content/module/zabbix_host/) to the module.
 
+**Note**: To use `community.crypto`, `python3-cryptography` needs to be installed on the managed nodes. You can override the list of required packages
+via `_zba_required_packages` or place a file into `vars/` for your operating system (see `RedHat.yml` or `Debian.yml`).
+
+Below is the code that loads these specific vars (in `tasks/main.yml`) to give you an idea how your file needs to be named:
+```
+- name: 'Load OS dependent variables'
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - >-
+          {{
+            ansible_distribution ~ '-' ~
+            ansible_distribution_major_version ~ '.yml'
+          }}
+        - '{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible
+      paths:
+        - '{{ role_path }}/vars'
+        - '{{ playbook_dir }}/vars'
+```
+
 Dependencies
 ------------
 
