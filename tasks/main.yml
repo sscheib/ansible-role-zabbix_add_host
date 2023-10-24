@@ -163,7 +163,7 @@
     ansible_httpapi_validate_certs: '{{ _zba_api_validate_certs }}'
     ansible_user: '{{ _zba_api_user }}'
     ansible_httpapi_pass: '{{ _zba_api_password | default(omit) }}'
-    zabbix_api_url: '{{ _zba_api_url | default(omit) }}'
+    zabbix_api_url: "{{ _zba_api_url | default('') }}"
 
     # HTTP basic auth variables
     http_login: '{{ _zba_http_login | default(omit) }}'
