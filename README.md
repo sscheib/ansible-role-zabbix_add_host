@@ -1,4 +1,4 @@
-[![ansible-lint](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.yml)
+[![ansible-lint](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-lint.ymlo) [![Publish latest release to Ansible Galaxy](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-galaxy.yml/badge.svg)](https://github.com/sscheib/ansible-role-zabbix_add_host/actions/workflows/ansible-galaxy.yml)
 
 zabbix_add_host
 =========
