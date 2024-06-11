@@ -1,0 +1,43 @@
+{
+  "ignorePatterns": [
+    {
+      "___comment___": "linux.die *always* returns 403",
+      "pattern": "^https?://linux.die.net"
+    },
+    {
+      "___comment___": "cloudflare *always* returns 403, probably because of their DDoS protection",
+      "pattern": "^https?://(:?www\\.)?cloudflare.com"
+    },
+    {
+      "___comment___": "ignoring SSHd ciphers",
+      "pattern": "^mailto:.+@(openssh.com|libssh.org)$"
+    },
+    {
+      "___comment___": "ignoring URLs with %23 as it leads to false positives. see https://github.com/tcort/markdown-link-check/issues/264",
+      "pattern": ".+?\\%23.+?"
+    },
+    {
+      "___comment___": "excluding private template repository",
+      "pattern": "https://github.com/sscheib/template-ansible-role"
+    }
+  ],
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 5,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [
+    200,
+    206
+  ],
+  "httpHeaders": [
+    {
+      "urls": [
+        ""
+      ],
+      "headers": {
+        "Accept-Encoding": "zstd;q=1, br;q=0.9, gzip;q=0.8, deflate;q=0.7, compress;q=0.6, *;q=0.1, identity;q=0",
+        "Accept": "*/*"
+      }
+    }
+  ]
+}
