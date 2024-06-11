@@ -4,7 +4,7 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) [![gitleaks](https://img.shields.io/badge/gitleaks-enabled-blue.svg)](https://github.com/gitleaks/gitleaks) [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://github.com/apps/renovate) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org) [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 <!-- markdownlint-disable MD013 MD041 -->
 
-## `zabbix_add_host`
+## zabbix_add_host
 
 Add hosts to Zabbix server instances with certificate validation enabled.
 
@@ -24,8 +24,8 @@ This role's purpose is to ease the entrance level of certificate validation with
 
 This role requires following collections (specified via `collections/requirements.yml`):
 
-- [`zabbix.zabbix`](https://catalog.redhat.com/software/collection/zabbix/zabbix): v1.1.1 or greater
-- [`community.crypto`](https://docs.ansible.com/ansible/latest/collections/community/crypto/index.html): v2.3.2 or greater
+- [`zabbix.zabbix`](https://catalog.redhat.com/software/collection/zabbix/zabbix)
+- [`community.crypto`](https://docs.ansible.com/ansible/latest/collections/community/crypto/index.html)
 
 **Note**: To make use of [Red Hat certified collections](https://www.redhat.com/en/technologies/management/ansible/content-collections), you need to be a Red Hat subscriber with a
 subscription that provides [Red Hat Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible/features), which includes access to the
