@@ -14,8 +14,9 @@ rules:
   commas:
     level: 'error'
     max-spaces-after: -1
-  comments: 'enable'
-  comments-indentation: 'enable'
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: 'disable'
   document-end: 'enable'
   document-start: 'enable'
   empty-lines:
@@ -27,7 +28,8 @@ rules:
   indentation: 'enable'
   key-duplicates: 'enable'
   key-ordering: 'disable'
-  line-length: 'enable'
+  line-length:
+    max: 120
   new-line-at-end-of-file: 'enable'
   new-lines:
     type: 'unix'

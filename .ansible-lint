@@ -8,7 +8,7 @@ enable_list:
 
 kinds:
   - yaml: '.ansible-lint'
-  - yaml: '.github/workflows/ansible-lint.yml'
+  - yaml: '.github/workflows/*.{yml,yaml}'
   - yaml: '.pre-commit-config.yaml'
   - yaml: '.yamllint'
   - yaml: '**/*.{yml,yaml}'

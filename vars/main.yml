@@ -39,7 +39,7 @@ _zba_no_cert: '{{ zba_no_cert | default(_def_zba_no_cert) }}'
 # path to the certificate to extract issuer and subject from
 _zba_cert_path: '{{ zba_cert_path | default(undef()) }}'
 
-# use when Zabbix is served via a non-default path, e.g. /zbx
+# use when Zabbix is served via a non-default path, e.g. /zabbix
 _zba_api_url: '{{ zba_api_url | default(undef()) }}'
 
 # when accessing Zabbix requires additionally HTTP basic
