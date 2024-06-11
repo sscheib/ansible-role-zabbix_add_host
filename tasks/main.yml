@@ -24,7 +24,7 @@
               }}
             - '{{ ansible_distribution }}.yml'
             - '{{ ansible_os_family }}.yml'
-            - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible
+            - 'main.yml'  # fallback, vars/main.yml is always loaded by Ansible  # nospell
           paths:
             - '{{ role_path }}/vars'
             - '{{ playbook_dir }}/vars'
@@ -165,7 +165,7 @@
     ansible_httpapi_pass: '{{ _zba_api_password | default(omit) }}'
     zabbix_api_url: "{{ _zba_api_url | default('') }}"
 
-    # HTTP basic auth variables
+    # HTTP basic authentication variables
     http_login: '{{ _zba_http_login | default(omit) }}'
     http_password: '{{ _zba_http_password | default(omit) }}'
 ...

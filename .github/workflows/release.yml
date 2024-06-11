@@ -1,0 +1,57 @@
+---
+name: 'Publish to Ansible Galaxy'
+on:  # yamllint disable-line rule:truthy
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch: {}
+
+jobs:
+  check-current-branch:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      branch: '${{ steps.check_step.outputs.branch }}'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+        with:
+          fetch-depth: 0
+
+      - name: 'Determine current branch'
+        id: 'check_step'
+        # 1. Get the list of branches ref where this tag exists
+        # 2. Remove 'origin/' from that result
+        # 3. Put that string in output
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch="$(echo ${raw//origin\//} | tr -d '\n')"
+          echo "{name}=branch" >> $GITHUB_OUTPUT
+          echo "Branches where this tag exists : $branch."
+
+  build:
+    name: 'Publish to Ansible Galaxy'
+    runs-on: 'ubuntu-latest'
+    needs: 'check-current-branch'
+    steps:
+      - name: 'checkout'
+        uses: 'actions/checkout@v4'
+        if: "contains(${{ needs.check.outputs.branch }}, 'main')"
+
+      - name: 'galaxy'
+        uses: 'robertdebock/galaxy-action@1.2.1'
+        if: "contains(${{ needs.check.outputs.branch }}, 'main')"
+        with:
+          galaxy_api_key: '${{ secrets.galaxy_api_key }}'
+          git_branch: 'main'
+
+      - name: 'Create a new release on GitHub'
+        uses: 'softprops/action-gh-release@v2'
+        if: "contains(${{ needs.check.outputs.branch }}, 'main')"
+        with:
+          draft: false
+          prerelease: false
+          token: '${{ secrets.release_token }}'
+          discussion_category_name: 'Announcements'
+          generate_release_notes: true
+          make_latest: true
+...

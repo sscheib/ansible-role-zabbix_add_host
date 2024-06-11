@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard"
+  ],
+  "assignees": [
+    "sscheib"
+  ],
+  "packageRules": [
+    {
+      "paths": [
+        ".github/workflows/*.yml",
+        "collections/requirements.yml",
+        "roles/requirements.yml",
+        "requirements.yml",
+        "requirements.txt"
+      ],
+      "major": {
+        "enabled": true
+      },
+      "minor": {
+        "enabled": true
+      },
+      "rangeStrategy": "bump"
+    }
+  ],
+  "pre-commit": {
+    "enabled": true
+  }
+}

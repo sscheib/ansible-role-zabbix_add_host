@@ -1,0 +1,21 @@
+---
+name: 'pyspelling'
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - 'main'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: 'pyspelling'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@v4'
+
+      - name: 'pyspelling'
+        uses: 'rojopolis/spellcheck-github-actions@v0'
+        with:
+          config_path: '.github/spellcheck/spellcheck.yml'
+...
