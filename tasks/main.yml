@@ -50,6 +50,7 @@
       ansible.builtin.package:
         name: '{{ _zba_required_packages }}'
         update_cache: true
+        disable_plugin: '{{ _zba_installation_disable_plugins | default(omit) }}'
 
     - name: 'Read certificate information'
       community.crypto.x509_certificate_info:

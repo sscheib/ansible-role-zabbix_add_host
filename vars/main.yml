@@ -50,4 +50,8 @@ _zba_http_login: '{{ zba_http_login | default(undef()) }}'
 
 # HTTP basic authentication password
 _zba_http_password: '{{ zba_http_password | default(undef()) }}'
+
+# disable plugins during installation of packages
+# note: works only for Red Hat based operating systems
+_zba_installation_disable_plugins: '{{ zba_installation_disable_plugins | default([]) }}'
 ...
