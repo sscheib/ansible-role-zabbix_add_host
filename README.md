@@ -42,6 +42,7 @@ certified collections. If you don't own any subscriptions that provides this acc
 | `zba_api_port`                               | `443`                        | false    | port of the Zabbix server API                                                  |
 | `zba_api_use_ssl`                            | `true`                       | false    | whether to connect to the Zabbix API via `SSL`                                 |
 | `zba_api_validate_certs`                     | `true`                       | false    | whether to validate certificates when connecting to the API                    |
+| `zba_installation_disable_plugins`           | `[]`                         | false    | list of package manager plugins to disable when installing dependencies        |
 | `zba_no_cert`                                | `false`                      | false    | whether to not deploy certification validation (usually not needed to be set)  |
 | `zba_cert_path`                              | unset                        | false    | path to the certificate to extract issuer and subject from                     |
 | `zba_api_url`                                | unset                        | false    | use when Zabbix is served via a non-default path, e.g. `/zbx`                  |
