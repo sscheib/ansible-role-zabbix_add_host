@@ -6,7 +6,7 @@
     },
     {
       "___comment___": "gnu.org often returns 0, causing failed CI/CD checks",
-      "pattern": "^https?://gnu.org"
+      "pattern": "^https?://(:?www\\.)?gnu.org"
     },
     {
       "___comment___": "cloudflare *always* returns 403, probably because of their DDoS protection",
