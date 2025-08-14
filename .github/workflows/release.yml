@@ -13,7 +13,7 @@ jobs:
       branch: '${{ steps.check_step.outputs.branch }}'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@v5'
         with:
           fetch-depth: 0
 
@@ -34,7 +34,7 @@ jobs:
     needs: 'check-current-branch'
     steps:
       - name: 'checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@v5'
         if: "contains(${{ needs.check.outputs.branch }}, 'main')"
 
       - name: 'galaxy'
