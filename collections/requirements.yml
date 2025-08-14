@@ -4,5 +4,5 @@ collections:
     version: '1.4.2'
 
   - name: 'community.crypto'
-    version: '2.26.5'
+    version: '3.0.3'
 ...
