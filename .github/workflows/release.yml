@@ -45,7 +45,7 @@ jobs:
           git_branch: 'main'
 
       - name: 'Create a new release on GitHub'
-        uses: 'softprops/action-gh-release@v2'
+        uses: 'softprops/action-gh-release@v3'
         if: "contains(${{ needs.check.outputs.branch }}, 'main')"
         with:
           draft: false
